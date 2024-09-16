@@ -89,42 +89,15 @@ def todos():
     # ------------------------------------------------------
     # LangChain - RAG chain with chat history
 
-    prompt2 = ChatPromptTemplate.from_messages(
-    [
-        (
-            "system", 
-            (
-                "Eres un asistente especializado en explicar **procesos de IT de la Universidad Francisco Marroquín (UFM)**. "
-                "Responde las preguntas únicamente basándote en el siguiente contexto:\n{context} "
-                
-                "**Reglas para responder preguntas**:\n"
-                "1. Identificar el proceso mencionado basándote en **coincidencias razonables** entre el nombre, código o palabras clave del proceso mencionado en la consulta.\n"
-                "2. Si el proceso mencionado tiene un alto grado de similitud con uno de los procesos que conoces, responde basándote en ese proceso, pero aclara la relación si no es una coincidencia exacta.\n"
-                "3. Si no puedes encontrar una coincidencia suficientemente fuerte, responde amablemente diciendo que no puedes proporcionar información sobre el proceso solicitado.\n"
-                "4. Si el proceso no está disponible, no existe o no puedes proporcionar información, responde amablemente e indica que el proceso no está entre los conocidos por ti.\n"
-                "5. No respondas preguntas que no estén relacionadas con los procesos de IT de la UFM. Si la consulta está fuera de este dominio, indica que no puedes proporcionar información sobre ese tema."
-                "\nCuando puedas identificar un proceso razonablemente relacionado, debes seguir estos pasos (formatea la respuesta de la forma más legible posible):\n"
-                "1. Identifica el nombre y código del proceso mencionado (colócalo en **negrita**).\n"
-                "2. Proporciona una explicación detallada que incluya el objetivo del proceso, participantes clave, etapas, tiempos estimados, decisiones clave y consideraciones adicionales si aplican.\n"
-                "3. Explica el flujograma destacando los puntos importantes y cómo se relacionan con las fases del proceso.\n"
-                "4. Muestra el enlace de descarga del flujograma si existe\n\n"
-                "**Si no puedes identificar un proceso claro y relevante, responde siempre indicando que no puedes proporcionar información sobre ese tema.**"
-            )
-        ),
-        MessagesPlaceholder(variable_name="history"),
-        ("human", "{question}")
-    ]
-)
-
-
 
     prompt = ChatPromptTemplate.from_messages(
     [
         (
             "system", 
             (
-                "Eres un asistente amigable especializado en explicar los **procesos de IT de la Universidad Francisco Marroquín (UFM)**. "
-                "Responde las preguntas únicamente basándote en el siguiente contexto:\n{context} a menos que sea un saludo, en el caso del saludo responde humanamente"
+                "Eres un asistente especializado en explicar los **procesos de IT de la Universidad Francisco Marroquín (UFM)**. Eres amigable y servicial "
+                "Responde a preguntas como 'hola', '¿cómo estás?', ' que tal' , 'buenos días', etc., de manera cordial, ya que usualmente los usuarios comienzan saludando "
+                "Responde las consultas sobre procesos basándote únicamente en el siguiente contexto:\n{context} "
                "\nCuando identifiques un proceso que tenga relación con la consulta, **debes seguir estrictamente los siguientes pasos** (formatea la respuesta de manera clara y organizada):\n"
                 "1. **Identifica el nombre y código del proceso mencionado** (colócalo en **negrita** para destacarlo).\n"
                 "2. **Proporciona una explicación detallada** que incluya lo siguiente:\n"
@@ -137,6 +110,7 @@ def todos():
                 "3. **Explica el flujograma** del proceso, destacando los puntos importantes y cómo estos se relacionan con las fases del proceso descritas. \n"
                 "4.  Si en la metadata existe el campo 'link-flujograma', muestra un enlace clickeable con el texto 'Ver flujograma' **NO DEBES INVENTAR UNA URL SIEMPRE USA LA DE LA METADATA**. Si el campo 'link-flujograma' no está presente en la metadata, omite el enlace y no lo muestres\n\n"
                 "**Importante**: Si no puedes identificar un proceso claro y relevante, responde siempre indicando que no puedes proporcionar información sobre ese tema."
+                "**Importante**: No respondas preguntas que no estén relacionadas con los procesos de la Universidad Francisco Marroquín UFM. Si la consulta está fuera de este dominio, indica que no puedes proporcionar información sobre ese tema."
             )
         ),
         MessagesPlaceholder(variable_name="history"),
@@ -274,20 +248,21 @@ def todos():
                 # session_state append
                 st.session_state.messages.append({"role": "assistant", "content": response['response']})
 
-                print (full_context)
+                ##print (full_context)
 
 
-PAGES = {
-    "Todos" : todos
-}
+#PAGES = {
+#    "Todos" : todos
+#}
 
 def main():
     #import streamlit as st
     # Título de la página
     st.set_page_config(page_title='Procesos UFM-IT 🔗')
    # st.sidedar.title('Navigation')
-    choice = st.sidebar.selectbox("--", list(PAGES.keys()))
-    PAGES[choice]()
+   # choice = st.sidebar.selectbox("--", list(PAGES.keys()))
+   # PAGES[choice]()
+    todos()
 
 if __name__ == "__main__":
     main()
