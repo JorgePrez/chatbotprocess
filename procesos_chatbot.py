@@ -189,9 +189,9 @@ def todos():
        # st.title('Asistente de procesos')
         streaming_on = st.toggle('Streaming (Mostrar generación de texto en tiempo real)',value=True)
         st.button('Limpiar pantalla', on_click=clear_chat_history)
-        st.divider()
-        st.write("History Logs(Debug)")
-        st.write(history.messages)
+        #st.divider()
+        #st.write("History Logs(Debug)")
+        #st.write(history.messages)
 
     # Initialize session state for messages if not already present
     if "messages" not in st.session_state:
