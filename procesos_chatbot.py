@@ -135,13 +135,13 @@ def todos():
     # 2LJ8Q2CO0H - FULL WORD
     # PBXHV68Y30 - FULL PDF
     # ZICV33XA4X  - FULL PDF 2  Ya no exi
-    #NXHVZAH2VO - TODOS DE IT
+    #4ZV6BROPKT - TODOS DE IT
 
 
 
     # Amazon Bedrock - KnowledgeBase Retriever 
     retriever = AmazonKnowledgeBasesRetriever(
-        knowledge_base_id= "NXHVZAH2VO", #"PAQSWKEITI", #  Knowledge base ID
+        knowledge_base_id= "4ZV6BROPKT", #"PAQSWKEITI", #  Knowledge base ID
         retrieval_config={"vectorSearchConfiguration": {"numberOfResults": 50}}, #aqui siempre deberia salir el que coincide con el nombre 
         #ojo que pasa si piden la explicación de más de 1 proceso
     )
