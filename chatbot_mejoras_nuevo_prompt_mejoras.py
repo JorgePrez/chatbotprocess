@@ -16,7 +16,7 @@ from pydantic import BaseModel  ##Importante esto a veces no es compatible
 from langchain.schema import Document
 from langchain.schema.runnable import RunnableLambda
 
-from langchain_openai.chat_models import ChatOpenAI
+#from langchain_openai.chat_models import ChatOpenAI
 
 from collections import defaultdict
 from langchain.schema import Document  # Asegúrate de importar Document si es necesario
