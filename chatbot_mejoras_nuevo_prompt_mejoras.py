@@ -209,7 +209,7 @@ def generar_configuracion_retriever():
     # Construir la configuración base
     config = {
         "vectorSearchConfiguration": {
-            "numberOfResults":  50  #maximo 100
+            "numberOfResults":  100  #maximo 100
         }
     }
 
